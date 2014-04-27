@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* 
+    @名称: layout
+    @功能: 布局样式
+*/
+@import url(base.css);
+.w{width:1000px;margin:0 auto;}
+.w-a{padding: 0 10px;}
+.mt{margin-top: 12px;}
+.form input{border:1px solid #DFDFDF;}
+
+.table-c{border-color:#DFDFDF;}
+.table-c td{padding:3px;border-color:#DFDFDF;}
+
+.table-c thead tr{background:#73B1E0;color:#FFF;}
+.table-c tbody tr:nth-child(odd){background:#FFF;}
+.table-c tbody tr:nth-child(2){background:#F5F5F5;}
+.table-c tbody tr:hover{background:#FBFFE4;}

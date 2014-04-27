@@ -1,4 +1,2 @@
-PHP-Amateur_Common_System
-=========================
-
-基于thinkphp3.1.2的通用网站后台
+﻿## 简介
+基于THINKPHP3.2 邮件后台管理系统 
