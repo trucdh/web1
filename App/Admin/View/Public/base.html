@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>{$title}</title>
+    <link rel="stylesheet" type="text/css" href="__CSS__/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/admin.css"/>
+    <script type="text/javascript" src="__STATIC__/jquery-1.8.3.min.js"></script>
+    <script language="javascript" type="text/javascript" src="__STATIC__/date/WdatePicker.js"></script>
+    <script language="javascript" type="text/javascript" src="__STATIC__/datetimepicker.min.js"></script>
+    <!--<![endif]-->
+    <block name="style"></block>
+</head>
+<body>
+<!-- 头部 -->
+<div class="clearfix">
+    <div class="col-md-12 column" style="padding:0;">
+        <nav class="navbar navbar-default" role="navigation" style="margin:0;">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{:U('Index/index')}">后台首页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">邮件信息<strong
+                                class="caret"></strong></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{:U('Email/index')}">邮件列表</a></li>
+                            <li><a href="{:U('Email/addEmail')}">添加邮件</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">邮件模板<strong
+                                class="caret"></strong></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{:U('Email/emailTemplate')}">模板列表</a></li>
+                            <li><a href="{:U('Email/addTemplate')}">添加模板</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{:U('Index/index')}"></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong
+                                class="caret"></strong></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{:U('Public/logout')}">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="w-a mt">
+    <script src="__STATIC__/bootstrap-dropdown.js"></script>
+    <script>
+        $(function () {
+            $('.dropdown-toggle').dropdown();
+        })
+
+    </script>
+</div>
+<ul class="breadcrumb" style="margin:0;">
+    <li><a href="{:U('Index/index')}">首页</a> <span class="divider"></span></li>
+    <li><a href="{:U('Email/index')}">邮件列表</a> <span class="divider"></span></li>
+    <li><a href="{:U('Email/addEmail')}">添加邮件</a> <span class="divider"></span></li>
+    <li><a href="{:U('Email/emailTemplate')}">模板列表</a> <span class="divider"></span></li>
+    <li><a href="{:U('Email/addTemplate')}">添加模板</a> <span class="divider"></span></li>
+</ul>
+<!-- 内容区 -->
+<div id="content" style="padding:0 10px;">
+    <block name="content">
+        <h5> 用户名：{$user['username']}</h5>
+        <h5>姓名：{$user['realName']}</h5>
+        <h5>邮箱：{$user['email']}</h5>
+        <h5>登陆ip：{$user['lastIp']}</h5>
+        <h5>登陆时间：{$user['lastTime|date='Y-m-d H:i:s',###']}</h5>
+    </block>
+</div>
+</body>
+</html>

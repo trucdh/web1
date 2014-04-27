@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* 
+    @名称: admin
+    @功能: 后台样式
+*/
+.header{margin-top:10px;height:30px;line-height: 30px;overflow: hidden;}
+.header li{float: left; margin-right:10px;height:28px;line-height:28px;padding:0 5px;background:#F5F5F5;border:1px solid #DFDFDF;}
+.header li a{ }
+
+/*发送邮件页面*/
+.add_email{width:1000px;margin-top:20px;}

@@ -1,0 +1,79 @@
+<extend name="Public/base"/>
+<block name="content">
+    <style type="text/css">
+        .ui-dialog {
+            overflow: auto;
+        }
+    </style>
+    <script src="__STATIC__/lib/sea.js"></script>
+    <script>
+        seajs.config({
+            alias: {
+                "jquery": "jquery-1.10.2.js"
+            }
+        });
+    </script>
+    <script>
+        seajs.use(['jquery', '__STATIC__/src/dialog'], function ($, dialog) {
+            $('.read').on('click', function () {
+                var id = $(this).attr('readid');
+                $.post("{:U('Email/emailOne')}", { id: id},
+                        function (data) {
+                            var da = jQuery.parseJSON(data)
+                            var title = da.title;
+                            var content = da.content;
+                            var d = dialog({
+                                title: title,
+                                content: content,
+                                okValue: '确认',
+                                ok: function () {
+                                }
+                            });
+                            d.show();
+                        });
+            });
+        });
+    </script>
+    <div class="w-a mt">
+        <div><a href="{:U('Email/index')}">邮件列表</a>-<a href="{:U('Email/index?status=1')}">已发送</a>-<a
+                href="{:U('Email/index?status=2')}">发送失败</a>-<a href="{:U('Email/index?status=0')}">未发送</a></div>
+        <table border="1" class="table-bordered table-condensed table-hover mt" width="100%">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>标题</td>
+                <td>内容</td>
+                <td>邮箱</td>
+                <td>定时发送</td>
+                <td>添加时间</td>
+                <td>IP</td>
+                <td>状态</td>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="v" key="k">
+                <tr>
+                    <td>{$v['id']}</td>
+                    <td>{$v['title']}</td>
+                    <td><a href="javascript:void(0)" class="read" readid="{$v['id']}">查看</a></td>
+                    <td>{$v['email']}</td>
+                    <td>
+                        <if condition="$v['timing'] neq '0'">{$v['timing']|date='Y-m-d H:i:s',###}</if>
+                    </td>
+                    <td>{$v['add_time']|date='Y-m-d H:i:s',###}</td>
+                    <td>{$v['add_ip']}</td>
+                    <td>
+                        <if condition="$v['status'] == 0">未发送
+                            <elseif condition="$v['status'] == 1"/>
+                            发送成功
+                            <else/>
+                            发送失败
+                        </if>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <div style="text-align: center;">{$page}</div>
+    </div>
+</block>

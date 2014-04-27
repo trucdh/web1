@@ -1,0 +1,60 @@
+<extend name="Public/base"/>
+<block name="content">
+    <style type="text/css">
+        .ui-dialog {
+            overflow: auto;
+        }
+    </style>
+    <script src="__STATIC__/lib/sea.js"></script>
+    <script>
+        seajs.config({
+            alias: {
+                "jquery": "jquery-1.10.2.js"
+            }
+        });
+    </script>
+    <script>
+        seajs.use(['jquery', '__STATIC__/src/dialog'], function ($, dialog) {
+            $('.read').on('click', function () {
+                var id = $(this).attr('readid');
+                $.post("{:U('Email/templateOne')}", { id: id},
+                        function (data) {
+                            var da = jQuery.parseJSON(data)
+                            var title = da.title;
+                            var content = da.content;
+                            var d = dialog({
+                                title: title,
+                                content: content,
+                                okValue: '确认',
+                                ok: function () {
+                                }
+                            });
+                            d.show();
+                        });
+            });
+        });
+    </script>
+    <div class="w-a mt">
+        <table border="1" class="table table-bordered table-condensed table-hover mt" width="100%">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>标题</td>
+                <td>内容</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="list" item="v" key="k">
+                <tr>
+                    <td>{$v['id']}</td>
+                    <td>{$v['title']}</td>
+                    <td><a href="javascript:void(0)" class="read" readid="<?= $v['id'] ?>">预览</a></td>
+                    <td><a href="/Admin/Email/templateEdit/id/{$v['id']}">编辑</a>-
+                        <a href="/Admin/Email/templateDel/id/{$v['id']}">删除</a></td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+    </div>
+</block>
